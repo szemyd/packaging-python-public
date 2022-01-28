@@ -1,0 +1,35 @@
+name: Empty out Functions
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    # optionally use a convenient Ubuntu LTS + CUDA + DVC + CML image
+    # container: docker://dvcorg/cml:0-dvc2-base1-gpu
+    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1-gpu
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: false
+          activate-environment: strip
+          environment-file: strip_action.yaml
+          python-version: 3.9
+      - uses: iterative/setup-cml@v1
+      - name: Run empty function
+        shell: bash -l {0}
+        run: |
+          python -m libcst.tool codemod replace_functions.ReplaceFunctionCommand .
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "szemyd"
+          git config --global user.email "szemy2@gmail.com"
+
+          git add -A
+          git commit -m "Stripped functions"
+          git push
+#       - name: Push changes # push the output folder to your repo
+#         uses: ad-m/github-push-action@master
+#         with:
+#           branch: B77 #ignore if your branch is master
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           force: true
