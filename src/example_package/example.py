@@ -1,4 +1,4 @@
-def add_one():
-    something="something"
-    willthisbestripped =2
-    pass
+def add_one(number):
+    something='something'
+    hey = f"sup {number}"
+    return number + 1
