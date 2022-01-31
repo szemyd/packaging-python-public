@@ -16,13 +16,14 @@ formatter: ['black', '-']
 
 # determine if the module should be touched.
 
-blacklist_patterns: []
+blacklist_patterns: ['.*replace_functions\.py']
 
 # List of modules that contain codemods inside of them.
 
 modules:
 
 - 'libcst.codemod.commands'
+- 'mycodemod'
 
 # Absolute or relative path of the repository root, used for providing
 
