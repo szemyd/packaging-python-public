@@ -37,10 +37,8 @@ class ReplaceFunctionCommand(VisitorBasedCodemodCommand):
         # Initialize the base class with context, and save our args. Remember, the
         # "dest" for each argument we added above must match a parameter name in
         # this init.
-        print("this happens")
         super().__init__(context)
-        # self.string = string
-        # self.constant = constant
+
 
     def leave_FunctionDef(self, original_node: cst.FunctionDef, updated_node: cst.FunctionDef) -> cst.FunctionDef:
         replace_function = cst.FunctionDef(
