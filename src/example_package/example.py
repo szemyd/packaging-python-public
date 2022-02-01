@@ -1,2 +1,6 @@
 def add_one():
-    pass
+    counter = 0
+    for i in range(5):
+        counter+=1
+    
+    return counter
