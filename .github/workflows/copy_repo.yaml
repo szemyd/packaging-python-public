@@ -30,6 +30,9 @@ jobs:
           source_ssh_private_key: ${{ secrets.SOURCE_SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
           destination_ssh_private_key:  ${{ secrets.DESTINATION_SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY` 
       - uses: actions/checkout@v2
+      - name: Checkout main branch
+        run: |
+          git checkout main
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: false
@@ -45,7 +48,8 @@ jobs:
         run: |
           git config --global user.name "szemyd"
           git config --global user.email "szemy2@gmail.com"
-
+          
+          git checkout main
           git add -A
           git commit -m "Stripped functions"
           git push
