@@ -41,13 +41,11 @@ jobs:
         shell: bash -l {0}
         run: |
           python -m libcst.tool codemod replace_functions.ReplaceFunctionCommand .
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.DESTINATION_SSH_PRIVATE_KEY }}
-        with:
-          source-directory: '.'
-          destination-github-username: 'szemyd'
-          destination-repository-name: 'packaging-python-public'
-          user-email: szemy2@gmail.com
-          target-branch: main
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "szemyd"
+          git config --global user.email "szemy2@gmail.com"
+
+          git add -A
+          git commit -m "Stripped functions"
+          git push
