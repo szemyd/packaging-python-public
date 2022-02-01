@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Copy Repo, Strip Functions and Git Commit
 on: 
   push:
 #   pull_request:
